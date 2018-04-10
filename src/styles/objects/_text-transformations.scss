@@ -1,0 +1,29 @@
+// 
+// Transformações de texto e alinhamentos
+// -----------------------------------------------------
+
+
+// Transformações de texto
+// --------------------------
+%text-uppercase { text-transform: uppercase; }
+%text-lowercase { text-transform: lowercase; }
+%text-italic    { text-align: right; }
+
+
+// Decorações de texto
+// --------------------------
+%text-decoration-none      { text-decoration: none; }
+%text-decoration-underline { text-decoration: underline; }
+
+
+// Alinhamento de texto
+// --------------------------
+%text-center  { text-align: center; }
+%text-justify { text-align: justify; }
+%text-left    { text-align: left; }
+%text-right   { text-align: right; }
+
+
+// Estilos de lista
+// --------------------------
+%list-style-none { list-style: none; }

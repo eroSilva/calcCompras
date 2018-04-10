@@ -1,0 +1,20 @@
+// Cores
+// ------------------
+$color-primary: #90bff1;
+
+$black : #000000;
+$white : #ffffff;
+
+$gray : #adadad;
+$gray-light : lighten($gray, 15%);
+$gray-lighter : lighten($gray, 25%);
+
+
+// Espaçamentos
+// ------------------
+$padding-base: 10px !default;
+
+
+// Transições
+// ------------------
+$transition-default: .2s;

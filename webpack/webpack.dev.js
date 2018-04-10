@@ -7,7 +7,6 @@ const devConfig = {
 	devServer: {
 		contentBase: PATHS.build,
 		open: true,
-		hot: true
 	},
 	module: {
 		rules: [

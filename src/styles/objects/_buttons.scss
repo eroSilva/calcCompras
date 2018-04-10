@@ -1,0 +1,16 @@
+// Transformações de texto e alinhamentos
+// -----------------
+
+.btn{
+	display: inline-block;
+	border: none;
+	padding: $padding-base $padding-base*2;
+	background: $color-primary;
+	color: $white;
+	cursor: pointer;
+	transition: $transition-default;
+
+	&:hover{
+		background: darken($color-primary, 15%); 
+	}
+}

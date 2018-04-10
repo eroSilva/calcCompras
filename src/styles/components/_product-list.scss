@@ -1,0 +1,35 @@
+// Lista de produtos
+// -----------------
+
+.product-list{
+	height: 60vh;
+	overflow: auto;
+	@extend %list-style-none;
+	
+	.product-items{
+		display: flex;
+		align-items: center;
+		border-bottom: 1px solid transparent;
+	}
+
+	.product-name{
+		width: 60%;
+		padding-left: $padding-base*2;
+	}
+
+	.product-price{
+		width: 70%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0 $padding-base*3;
+		font-size: 1.5em;
+		font-weight: 700;
+	}
+
+	.product-add{
+		width: 100px;
+		height: 80px;
+		font-size: 2em;
+	}
+}
