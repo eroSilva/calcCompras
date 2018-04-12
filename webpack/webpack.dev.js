@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const {PATHS} = require('./webpack.common.js');
+const Autoprefixer = require('autoprefixer');
 
 const devConfig = {
 	mode: 'development',
@@ -19,6 +20,13 @@ const devConfig = {
 					{
 						loader: 'css-loader',
 						options: {sourceMap: true}
+					},
+					{
+						loader: 'postcss-loader',
+						options: {
+							plugins: () => [Autoprefixer()],
+							sourceMap: true
+						}
 					},
 					{
 						loader: 'sass-loader',

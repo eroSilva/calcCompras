@@ -1,6 +1,7 @@
 const { PATHS } = require('./webpack.common.js');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
+const Autoprefixer = require('autoprefixer');
 
 const prodConfig = {
 	mode: 'production',
@@ -13,10 +14,19 @@ const prodConfig = {
 					use: [
 						{
 							loader: 'css-loader',
+							options: {
+								minimize: true
+							}
+						},
+						{
+							loader: 'postcss-loader',
+							options: {
+								plugins: () => [Autoprefixer()]
+							}
 						},
 						{
 							loader: 'sass-loader',
-						}
+						},
 					]
 				})
 			}
