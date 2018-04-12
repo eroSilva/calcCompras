@@ -18,7 +18,10 @@ var LocalData = function() {
 	
 	function setItem(baseName, data) {
 		var baseData = getItem(baseName);
-		
+		var id = new Date();
+
+		id = id.getYear() + '' +  id.getMonth() + '' +  id.getDay() + '' + id.getMilliseconds();
+		data.id = id;
 		data.price = Accounting.unformat(data.price);
 		
 		baseData.push(data);

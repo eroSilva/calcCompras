@@ -16,7 +16,7 @@ var RenderTemplate = function() {
 			<li class="product-items">
 				<h3 class="product-name">${data.name}</h3>
 				<strong class="product-price">R$ <span class="price-value">${data.price}</span></strong>
-				<button type="button" class="btn product-add">Buy</button>
+				<button type="button" class="btn product-add" data-id="${data.id}">Buy</button>
 			</li>
 		`;
 	};
