@@ -1,0 +1,18 @@
+// Controles para inclusão de produtos
+// -----------------
+
+.product-insert{
+	display: flex;
+	height: 70px;
+	box-shadow: 0 -3px 10px -3px rgba(0, 0, 0, 0.1);
+
+	.form-control{
+		width: 40%;
+		border-top-color: transparent;
+	}
+
+	.btn{
+		width: 20%;
+		font-size: 2em;
+	}
+}

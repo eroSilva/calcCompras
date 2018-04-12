@@ -1,4 +1,4 @@
-// Transformações de texto e alinhamentos
+// Botões
 // -----------------
 
 .btn{
@@ -9,8 +9,18 @@
 	color: $white;
 	cursor: pointer;
 	transition: $transition-default;
+	@extend %text-center;
 
 	&:hover{
 		background: darken($color-primary, 15%); 
+	}
+
+
+	&.btn-action{
+		background: darken($color-primary, 15%);
+		
+		&:hover{
+			background: darken($color-primary, 30%); 
+		}
 	}
 }
