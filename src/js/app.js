@@ -1,4 +1,2 @@
-LocalData = require('./modules/localData')();
-Accounting = require('accounting-js');
-RenderTemplate = require('./modules/renderTemplate')();
+Helper = require('./modules/helpers');
 Product = require('./modules/product')();

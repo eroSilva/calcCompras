@@ -1,48 +1,62 @@
 'use strict';
 
-var Product = function() {
-	var productView = {
-		list: document.getElementById('productList'),
-		formInsert: document.getElementById('formInsert')
-	};
+var LocalData = require('./localData')();
+var RenderTemplate = require('./renderTemplate');
 
-	function getFormData(form){
+var Product = function() {
+	function getFormData(form) {
 		var mainForm = form;
 		var result = {};
-		
-        for(var i = 0; i < mainForm.elements.length; i++){
-            if(mainForm.elements[i].name == '') continue;
 
-            result[mainForm.elements[i].name] = mainForm.elements[i].value;
-		};
+		[... mainForm.elements].map(function(element){
+			if(element.name !== ''){	
+				result[element.name] = element.value;
+			};
+		});
 
 		return result;
 	};
 
-	function renderHTML(data, template) {
-		var productElm = RenderTemplate[template](data);
-
-		productView.list.insertAdjacentHTML('afterbegin', productElm);
-	};
-
-	window.addEventListener('load', function(){
+	function buyProduct() {
+		var id = this.dataset.id;
 		var loadedProducts = LocalData.select('produtos');
+		
+		loadedProducts.map(function(obj){
+			if(obj.id == id)
+				obj.amount += 1;
+		});
 
-		for(var product in loadedProducts){
-			renderHTML(loadedProducts[product], 'produtos');
-		};
-	});
+		LocalData.update('produtos', loadedProducts, function(data){
+			RenderTemplate.updatePurchase(data);
+		});
+	};
 
 	formInsert.addEventListener('submit', function(e){
 		e.preventDefault();
 
-		var data = getFormData(this);
+		var dataProducts = getFormData(this);
 
-		renderHTML(data, 'produtos');
-		LocalData.insert('produtos', data);
+		LocalData.insert('produtos', dataProducts, function(data){
+			RenderTemplate.insertProduct(dataProducts);
+			RenderTemplate.updatePurchase(data);
+		});
+
+		Helper.futureSelect('[data-id]', buyProduct);
 		
 		this.reset();
 	});
+
+	window.addEventListener('load', function(){
+		var loadedProducts = LocalData.select('produtos');
+
+		RenderTemplate.updatePurchase(loadedProducts);
+
+		loadedProducts.map(function(object){
+			RenderTemplate.insertProduct(object);
+		});
+	});
+
+	Helper.futureSelect('[data-id]', buyProduct);
 };
 
 module.exports = Product;

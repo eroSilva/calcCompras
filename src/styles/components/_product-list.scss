@@ -23,6 +23,12 @@
 		font-weight: 300;
 	}
 
+	.product-amount{
+		white-space: nowrap;
+		font-size: .8em;
+		opacity: .5;
+	}
+
 	.product-price{
 		display: flex;
 		justify-content: space-between;

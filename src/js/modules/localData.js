@@ -11,26 +11,46 @@ var LocalData = function() {
 			localStorage.setItem(bases[item], '[]');
 		};
 	};
-	
-	function getItem(baseName) {
-		return JSON.parse(localStorage.getItem(baseName));
+
+	function idGenerator() {
+		return Date.now();
 	};
 	
-	function setItem(baseName, data) {
+	function getItem(baseName, id) {
+		var baseData = JSON.parse(localStorage.getItem(baseName));
+		var results = baseData.filter(function(obj) {
+			if(id == undefined || id == obj.id){
+				return obj;
+			};
+		});
+		
+		return results;
+	};
+	
+	function setItem(baseName, data, fn) {
 		var baseData = getItem(baseName);
-		var id = new Date();
+		var id = idGenerator();
 
-		id = id.getYear() + '' +  id.getMonth() + '' +  id.getDay() + '' + id.getMilliseconds();
 		data.id = id;
-		data.price = Accounting.unformat(data.price);
+		data.amount = +1;
+		data.price = parseFloat(data.price);
 		
 		baseData.push(data);
 		localStorage.setItem(baseName, JSON.stringify(baseData));
+
+		return (fn) ? fn(baseData) : null;
+	};
+
+	function updateItem(baseName, data, fn) {
+		localStorage.setItem(baseName, JSON.stringify(data));
+
+		return (fn) ? fn(data) : null;
 	};
 
 	return {
 		insert: setItem,
 		select: getItem,
+		update: updateItem
 	};
 };
 
