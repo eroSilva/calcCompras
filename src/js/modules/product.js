@@ -18,16 +18,20 @@ var Product = function() {
 	};
 
 	function buyProduct() {
-		var id = this.dataset.id;
+		var id = this.dataset.buy;
 		var loadedProducts = LocalData.select('produtos');
+		var boughtProduct = {};
 		
 		loadedProducts.map(function(obj){
-			if(obj.id == id)
+			if(obj.id == id){
 				obj.amount += 1;
+				boughtProduct = obj;
+			}
 		});
 
 		LocalData.update('produtos', loadedProducts, function(data){
 			RenderTemplate.updatePurchase(data);
+			RenderTemplate.updateProduct(boughtProduct, id);
 		});
 	};
 
@@ -41,7 +45,7 @@ var Product = function() {
 			RenderTemplate.updatePurchase(data);
 		});
 
-		Helper.futureSelect('[data-id]', buyProduct);
+		Helper.futureSelect('[data-buy]', buyProduct);
 		
 		this.reset();
 	});
@@ -56,7 +60,7 @@ var Product = function() {
 		});
 	});
 
-	Helper.futureSelect('[data-id]', buyProduct);
+	Helper.futureSelect('[data-buy]', buyProduct);
 };
 
 module.exports = Product;

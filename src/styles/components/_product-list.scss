@@ -5,6 +5,20 @@
 	height: calc(70vh - 70px);
 	overflow: auto;
 	@extend %list-style-none;
+
+	&:empty{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		&:before{
+			content: 'Nenhum produto adicionado...';
+			display: block;
+			opacity: .5;
+			font-size: 1.2em;
+			margin-bottom: $padding-base*3;
+		}
+	}
 	
 	.product-items{
 		display: flex;
