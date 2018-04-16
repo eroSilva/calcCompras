@@ -21,9 +21,13 @@
 	}
 	
 	.product-items{
+		position: relative;
 		display: flex;
 		align-items: center;
+		overflow: hidden;
 		border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+		transition: box-shadow $transition-default;
+		box-shadow: 0 0 0 600px rgba(0, 0, 0, 0), 0 0 70px -5px rgba(0,0,0,0);
 	}
 
 	.product-name,
@@ -38,9 +42,13 @@
 	}
 
 	.product-amount{
-		white-space: nowrap;
+		width: 30px;
 		font-size: .8em;
 		opacity: .5;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		@extend %text-right;
 	}
 
 	.product-price{
@@ -52,11 +60,50 @@
 		font-weight: 700;
 	}
 
-	.product-add{
+	.product-actions{
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: -1px;
+		right: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		user-select: none;
+		transition: $transition-default;
+		z-index: 1;
+	}
+	
+	.product-add,
+	.product-delete{
 		width: 20%;
+	}
+
+	.product-add{
 		height: 80px;
 		font-size: 1em;
 		margin-bottom: -1px;
 		border-bottom: 1px solid rgba(0,0,0,0.05);
+		user-select: none;
+	}
+
+	.product-delete{
+		height: 100%;
+		margin-left: auto;
+		font-size: inherit;
+		background: $white;
+		color: lighten($color-danger, 45%);
+		background: $color-danger;
+	}
+	
+	.product-items.open{
+		color: $color-danger;
+		box-shadow: 0 0 0 600px rgba(0, 0, 0, 0.15), 0 0 70px -5px rgba(0,0,0,.15);
+	}
+
+	.product-items:not(.open) .product-actions{
+		opacity: 0;
+		visibility: hidden;
+		transform: translateX(100%);
 	}
 }

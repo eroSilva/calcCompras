@@ -28,13 +28,21 @@ var Helpers = {
 			};
 
 			select();
-		}).then(
-			(elements) => {
-				elements.map(function(element){
-					element.addEventListener('click', callback);
-				});
-			}
-		);
+		});
+	},
+
+	classInParent: function(element, className){
+		var parentElement = element.parentElement;
+
+		if(parentElement.tagName == 'BODY'){
+			return false;
+		};
+
+		if(parentElement.classList.contains(className)){
+			return parentElement;
+		};
+
+		return this.classInParent(parentElement, className);
 	}
 };
 

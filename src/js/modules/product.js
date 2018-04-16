@@ -17,11 +17,13 @@ var Product = function() {
 		return result;
 	};
 
+	
+	// Funções para realizar a compra do produto
 	function buyProduct() {
-		var id = this.dataset.buy;
+		var id = Helper.classInParent(this, 'product-items').dataset.product;
 		var loadedProducts = LocalData.select('produtos');
 		var boughtProduct = {};
-		
+
 		loadedProducts.map(function(obj){
 			if(obj.id == id){
 				obj.amount += 1;
@@ -35,32 +37,115 @@ var Product = function() {
 		});
 	};
 
-	formInsert.addEventListener('submit', function(e){
+	function setBuyAction() {
+		Helper.futureSelect('.product-items .product-add').then(function(elements) {
+			elements.map(function(element) {
+				element.addEventListener('click', buyProduct);
+			});
+		});
+	};
+
+
+
+	// Funções para deletar um produto dacompra
+	function deleteProduct() {
+		var productElem = Helper.classInParent(this, 'product-items');
+		var id = productElem.dataset.product;
+		var loadedProducts = LocalData.select('produtos');
+		var deletedProduct = {};
+
+		loadedProducts.map(function(obj, index){
+			if(obj.id == id){
+				obj.amount -= 1;
+				deletedProduct = obj;
+			}
+			
+			if(obj.amount == 0){
+				productElem.remove();
+				
+				// console.log(index);
+				// console.log(obj);
+				loadedProducts.splice(index, index+1);
+			}
+		});
+
+		console.log(loadedProducts);
+
+
+		LocalData.update('produtos', loadedProducts, function(data){
+			RenderTemplate.updatePurchase(data);
+			RenderTemplate.updateProduct(deletedProduct, id);
+		});
+	};
+
+	function removeDeleteActions() {
+		[... document.querySelectorAll('.product-items')].map(function(element){	
+			element.classList.remove('open');
+		});
+	};
+
+	function setDeleteAction() {
+		Helper.futureSelect('.product-items').then(function(elements) {
+			elements.map(function(element) {
+				var touchTimeout;
+				
+				element.addEventListener('touchstart', function(){
+					touchTimeout = setTimeout(function(){
+						removeDeleteActions();
+						element.classList.toggle('open');
+					}, 200);
+				});
+				
+				element.addEventListener('touchend', function(){
+					clearTimeout(touchTimeout);
+				});
+			});
+		});
+		
+		Helper.futureSelect('.product-items .product-delete').then(function(elements) {
+			elements.map(function(element) {
+				element.addEventListener('click', deleteProduct);
+			});
+		});		
+	};
+
+
+
+	// Eventos
+	formInsert.addEventListener('submit', function(e) {
 		e.preventDefault();
 
 		var dataProducts = getFormData(this);
 
-		LocalData.insert('produtos', dataProducts, function(data){
+		LocalData.insert('produtos', dataProducts, function(data) {
 			RenderTemplate.insertProduct(dataProducts);
 			RenderTemplate.updatePurchase(data);
 		});
 
-		Helper.futureSelect('[data-buy]', buyProduct);
+		setBuyAction();
+		setDeleteAction();
 		
 		this.reset();
 	});
 
-	window.addEventListener('load', function(){
+	window.addEventListener('load', function() {
 		var loadedProducts = LocalData.select('produtos');
 
 		RenderTemplate.updatePurchase(loadedProducts);
 
-		loadedProducts.map(function(object){
+		loadedProducts.map(function(object) {
 			RenderTemplate.insertProduct(object);
 		});
 	});
 
-	Helper.futureSelect('[data-buy]', buyProduct);
+	document.addEventListener('touchstart', function(){	
+		if(!Helper.classInParent(event.srcElement, 'product-list')){
+			removeDeleteActions();			
+		};
+	});
+
+	setBuyAction();
+	setDeleteAction();
 };
 
 module.exports = Product;

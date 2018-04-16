@@ -8,7 +8,10 @@ var RenderTemplate = {
 				<h3 class="product-name">${data.name}</h3>
 				<span class="product-amount"><span class="amount-value">${data.amount}</span> x</span>
 				<strong class="product-price">R$ <span class="price-value">${formatedPrice}</span></strong>
-				<button type="button" class="btn product-add" data-buy="${data.id}">Buy</button>
+				<button type="button" class="btn product-add">Buy</button>
+				<div class="product-actions">
+					<button type="button" class="btn product-delete">Del</button>	
+				</div>
 			</li>`;
 
 		productList.insertAdjacentHTML('afterbegin', html);
@@ -18,6 +21,10 @@ var RenderTemplate = {
 		var productElm = document.querySelector('[data-product="' + id + '"]');
 		var formatedPrice = Helper.accounting.formatMoney(data.price);
 		
+		if(productElm == undefined){
+			return
+		};
+
 		productElm.querySelector('.product-name').innerText = data.name;
 		productElm.querySelector('.amount-value').innerText = data.amount;
 		productElm.querySelector('.price-value').innerText = formatedPrice;
