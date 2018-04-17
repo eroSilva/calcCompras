@@ -44,10 +44,11 @@ const commonConfig = {
 			description: 'CalcCompras, sua compra muito mais controlada!',
 			start_url: '.',
 			background_color: '#90bff1',
+			theme_color: '#90bff1',
 			icons: [
 			  	{
 					src: `${PATHS.src}/img/icon.png`,
-					sizes: [96, 128, 192, 256, 384, 512],
+					sizes: [256, 384, 512],
 					destination: path.join('img', 'icons')
 			  	}
 			]
