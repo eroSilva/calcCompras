@@ -31,7 +31,7 @@
       "type": "image/png"
     }
   ],
-  "name": "CalcCompras, calculadora de compras",
+  "name": "CalcCompras",
   "short_name": "CalcCompras",
   "orientation": "portrait",
   "display": "standalone",

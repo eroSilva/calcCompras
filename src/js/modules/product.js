@@ -62,15 +62,9 @@ var Product = function() {
 			
 			if(obj.amount == 0){
 				productElem.remove();
-				
-				// console.log(index);
-				// console.log(obj);
 				loadedProducts.splice(index, index+1);
 			}
 		});
-
-		console.log(loadedProducts);
-
 
 		LocalData.update('produtos', loadedProducts, function(data){
 			RenderTemplate.updatePurchase(data);

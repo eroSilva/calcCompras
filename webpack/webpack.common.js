@@ -2,6 +2,8 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
+const WorkboxPlugin = require('workbox-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 const PATHS = {
 	src: path.resolve(__dirname, '../src'),
@@ -29,7 +31,7 @@ const commonConfig = {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			title: 'Webpack',
+			title: 'Progressive Web Application',
 			template: `${PATHS.src}/index.html`
 		}),
 		
@@ -37,9 +39,10 @@ const commonConfig = {
 			filename: "manifest.json",
 			fingerprints: false,
 
-			name: 'CalcCompras, calculadora de compras',
+			name: 'CalcCompras',
 			short_name: 'CalcCompras',
 			description: 'CalcCompras, sua compra muito mais controlada!',
+			start_url: '.',
 			background_color: '#ffffff',
 			icons: [
 			  	{
@@ -48,6 +51,17 @@ const commonConfig = {
 					destination: path.join('img', 'icons')
 			  	}
 			]
+		}),
+
+		new WorkboxPlugin.GenerateSW({
+			clientsClaim: true,
+			skipWaiting: true
+		}),
+
+		new FaviconsWebpackPlugin({
+			logo: `${PATHS.src}/img/icon.png`,
+			prefix: path.join('img', 'icons/'),
+			inject: true
 		})
 	]
 }
