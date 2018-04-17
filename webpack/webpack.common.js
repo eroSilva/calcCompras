@@ -43,7 +43,7 @@ const commonConfig = {
 			short_name: 'CalcCompras',
 			description: 'CalcCompras, sua compra muito mais controlada!',
 			start_url: '.',
-			background_color: '#ffffff',
+			background_color: '#90bff1',
 			icons: [
 			  	{
 					src: `${PATHS.src}/img/icon.png`,
