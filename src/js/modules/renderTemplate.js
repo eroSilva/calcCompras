@@ -21,8 +21,12 @@ var RenderTemplate = {
 		var productElm = document.querySelector('[data-product="' + id + '"]');
 		var formatedPrice = Helper.accounting.formatMoney(data.price);
 		
+		if(data.amount == 0){
+			productElm.remove();
+		};
+
 		if(productElm == undefined){
-			return
+			return;
 		};
 
 		productElm.querySelector('.product-name').innerText = data.name;

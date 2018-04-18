@@ -2,8 +2,7 @@
 
 var LocalData = function() {
 	var bases = [
-		'produtos', 
-		'compra'
+		'produtos'
 	];
 
 	for(var item in bases){

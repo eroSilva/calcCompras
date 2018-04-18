@@ -12,14 +12,14 @@
 	outline: none;
 	@extend %text-center;
 
-	&:hover{
+	&:active{
 		background: darken($color-primary, 15%); 
 	}
 
 	&.btn-action{
 		background: darken($color-primary, 15%);
 		
-		&:hover{
+		&:active{
 			background: darken($color-primary, 30%); 
 		}
 	}
@@ -27,7 +27,7 @@
 	&.btn-danger{
 		background: darken($color-danger, 15%);
 		
-		&:hover{
+		&:active{
 			background: darken($color-danger, 30%); 
 		}
 	}

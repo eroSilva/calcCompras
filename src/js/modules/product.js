@@ -4,6 +4,10 @@ var LocalData = require('./localData')();
 var RenderTemplate = require('./renderTemplate');
 
 var Product = function() {
+	var touchTimeout;
+
+	
+	// Pegando Formdata
 	function getFormData(form) {
 		var mainForm = form;
 		var result = {};
@@ -16,6 +20,11 @@ var Product = function() {
 
 		return result;
 	};
+
+	// Setando altura para o HTML
+	function fixHeight() {
+		document.querySelector('html').style.height = window.innerHeight + 'px';
+	}
 
 	
 	// Funções para realizar a compra do produto
@@ -46,27 +55,24 @@ var Product = function() {
 	};
 
 
-
 	// Funções para deletar um produto dacompra
 	function deleteProduct() {
 		var productElem = Helper.classInParent(this, 'product-items');
 		var id = productElem.dataset.product;
 		var loadedProducts = LocalData.select('produtos');
+		var updatedProducts = {};
 		var deletedProduct = {};
 
-		loadedProducts.map(function(obj, index){
+		updatedProducts = loadedProducts.filter(function(obj){
 			if(obj.id == id){
 				obj.amount -= 1;
 				deletedProduct = obj;
-			}
-			
-			if(obj.amount == 0){
-				productElem.remove();
-				loadedProducts.splice(index, index+1);
-			}
+			};
+
+			return obj.amount > 0;
 		});
 
-		LocalData.update('produtos', loadedProducts, function(data){
+		LocalData.update('produtos', updatedProducts, function(data){
 			RenderTemplate.updatePurchase(data);
 			RenderTemplate.updateProduct(deletedProduct, id);
 		});
@@ -81,9 +87,9 @@ var Product = function() {
 	function setDeleteAction() {
 		Helper.futureSelect('.product-items').then(function(elements) {
 			elements.map(function(element) {
-				var touchTimeout;
-				
 				element.addEventListener('touchstart', function(){
+					clearTimeout(touchTimeout);
+
 					touchTimeout = setTimeout(function(){
 						removeDeleteActions();
 						element.classList.toggle('open');
@@ -130,12 +136,19 @@ var Product = function() {
 		loadedProducts.map(function(object) {
 			RenderTemplate.insertProduct(object);
 		});
+
+		fixHeight();
 	});
 
 	document.addEventListener('touchstart', function(){	
 		if(!Helper.classInParent(event.srcElement, 'product-list')){
 			removeDeleteActions();			
 		};
+	});
+
+	productList.addEventListener('scroll', function(){
+		removeDeleteActions();
+		clearTimeout(touchTimeout);
 	});
 
 	setBuyAction();
