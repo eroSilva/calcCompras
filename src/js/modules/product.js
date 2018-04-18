@@ -140,6 +140,10 @@ var Product = function() {
 		fixHeight();
 	});
 
+	window.addEventListener('resize', function(){
+		fixHeight();
+	});
+
 	document.addEventListener('touchstart', function(){	
 		if(!Helper.classInParent(event.srcElement, 'product-list')){
 			removeDeleteActions();			
