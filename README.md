@@ -17,10 +17,10 @@
 $ git clone https://github.com/eroSilva/calcCompras.git
 $ cd calcCompras
 
-# install dependencies
+# Instale as dependências
 $ yarn install
 
-# Run the project
+# Rode o projeto
 $ yarn start
 
 ```
