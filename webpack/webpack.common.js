@@ -3,7 +3,6 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const WorkboxPlugin = require('workbox-webpack-plugin');
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 const PATHS = {
 	src: path.resolve(__dirname, '../src'),
@@ -57,12 +56,6 @@ const commonConfig = {
 		new WorkboxPlugin.GenerateSW({
 			clientsClaim: true,
 			skipWaiting: true
-		}),
-
-		new FaviconsWebpackPlugin({
-			logo: `${PATHS.src}/img/icon.png`,
-			prefix: path.join('img', 'icons/'),
-			inject: true
 		})
 	]
 }

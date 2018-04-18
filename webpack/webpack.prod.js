@@ -1,6 +1,8 @@
+const path = require('path');
 const { PATHS } = require('./webpack.common.js');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const Autoprefixer = require('autoprefixer');
 
 const prodConfig = {
@@ -34,7 +36,14 @@ const prodConfig = {
 	},
 	plugins: [
 		new WebpackCleanupPlugin('dist'),
-		new ExtractTextPlugin('[name].css')
+		
+		new ExtractTextPlugin('[name].css'),
+		
+		new FaviconsWebpackPlugin({
+			logo: `${PATHS.src}/img/icon.png`,
+			prefix: path.join('img', 'icons/'),
+			inject: true
+		}),
 	]
 }
 
