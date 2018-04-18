@@ -4,7 +4,6 @@
 </p>
 
 <h1 align="center">calcCompras</h1>
-<h2 align="center">Calculadora de compras domésticas</h2>
 
 <p>Meu primeiro PWA, uma calculadora de compras domésticas pra você chegar no caixa do supermercado e não ter aquela surpresa desagradável.</p>
 
