@@ -26,3 +26,19 @@ ul,
 ol{
 	padding: 0;
 }
+
+
+// Scrollbar
+// -----------------
+::-webkit-scrollbar{
+	width: 5px;
+	visibility: hidden;
+}
+
+::-webkit-scrollbar-track{
+	background: transparent;
+}
+
+::-webkit-scrollbar-thumb{
+	background: rgba(0,0,0,0.2);
+}

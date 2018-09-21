@@ -4,7 +4,16 @@
 .product-insert{
 	display: flex;
 	height: 70px;
-	box-shadow: 0 -3px 10px -3px rgba(0, 0, 0, 0.1);
+	
+	@media(max-width: $screen-lg-max){
+		box-shadow: 0 -3px 10px -3px rgba(0, 0, 0, 0.1);
+	}
+
+	@media(min-width: $screen-lg-min){
+		order: 1;
+		margin-top: $padding-base*2;
+		box-shadow: 0 3px 10px -3px rgba(0, 0, 0, 0.1);
+	}
 
 	.form-control{
 		width: 40%;

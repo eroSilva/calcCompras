@@ -11,11 +11,20 @@ $gray-light : lighten($gray, 15%);
 $gray-lighter : lighten($gray, 25%);
 
 
+
 // Espaçamentos
 // ------------------
 $padding-base: 10px !default;
 
 
+
 // Transições
 // ------------------
 $transition-default: .2s;
+
+
+
+// Telas
+// ------------------
+$screen-lg-min: 768px;
+$screen-lg-max: 767px;

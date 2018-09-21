@@ -7,6 +7,15 @@
 	overflow: auto;
 	@extend %list-style-none;
 
+	@media(min-width: $screen-lg-min){
+		order: 2;
+		margin-right: -#{$padding-base/2};
+
+		&:hover::-webkit-scrollbar{
+			opacity: 1;
+		}
+	}
+
 	&:empty{
 		display: flex;
 		align-items: center;
