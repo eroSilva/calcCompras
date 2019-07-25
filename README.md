@@ -5,12 +5,10 @@
 
 <h1 align="center">calcCompras</h1>
 
-<p>Meu primeiro PWA, uma calculadora de compras domésticas pra você chegar no caixa do supermercado e não ter aquela surpresa desagradável.</p>
+<p>Uma calculadora de compras domésticas pra você chegar no caixa do supermercado e não ter aquela surpresa desagradável.</p>
 
 
 <h2>Começando</h2>
-<p>Esse projeto utiliza Yarn, SASS e Webpack</p>
-
 
 ```sh
 # Clone o repositório
@@ -18,16 +16,14 @@ $ git clone https://github.com/eroSilva/calcCompras.git
 $ cd calcCompras
 
 # Instale as dependências
-$ yarn install
+$ npm i
 
 # Rode o projeto
-$ yarn start
-
+$ npm run start
 ```
-
 
 <h2>Tasks</h2>
 <ul>
-	<li>yarn start</li>
-	<li>yarn run build</li>
+	<li>npm run start</li>
+	<li>npm run build</li>
 </ul>
