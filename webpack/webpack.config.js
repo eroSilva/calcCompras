@@ -4,7 +4,7 @@ const devConfig = require('./webpack.dev.js');
 const prodConfig = require('./webpack.prod.js');
 
 module.exports = (env) => {
-	console.log('env- ' + env);
+	console.log(`-------------------\n| ENV: ${env} |\n-------------------\n`);
 
 	if(env === 'development'){
 		return merge(commonConfig, devConfig);

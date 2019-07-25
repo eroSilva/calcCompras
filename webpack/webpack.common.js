@@ -48,7 +48,8 @@ const commonConfig = {
 			  	{
 					src: `${PATHS.src}/img/icon.png`,
 					sizes: [256, 384, 512],
-					destination: path.join('img', 'icons')
+					destination: './',
+					inject: true
 			  	}
 			]
 		}),
